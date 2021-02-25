@@ -21,25 +21,7 @@
     <ClCompile Include="source\core\Common.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\Create.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\core\Destroy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\core\Render.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\core\Setup.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\core\Update.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\core\EntryPoint.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\core\EngineCallable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\core\DeltaTime.cpp">
@@ -48,27 +30,30 @@
     <ClCompile Include="source\core\Input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\callables\Create.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\callables\EngineCallable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\callables\Render.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\callables\Setup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\callables\Update.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\callables\Destroy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\core\Engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\core\Common.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\core\Create.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\core\Destroy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\core\Render.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\core\Setup.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\core\Update.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\core\RenderWindow.h">
@@ -98,9 +83,6 @@
     <ClInclude Include="source\core\RectangleShape.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\core\EngineCallable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\core\ObjectManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -123,6 +105,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\core\Input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\callables\Create.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\callables\EngineCallable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\callables\Render.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\callables\Setup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\callables\Update.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\callables\Destroy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

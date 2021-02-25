@@ -96,7 +96,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SFML_STATIC;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)source;$(SolutionDir)source/core;$(SolutionDir)source/managers;$(SolutionDir)source/ui;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)source;$(SolutionDir)source/callables;$(SolutionDir)source/core;$(SolutionDir)source/managers;$(SolutionDir)source/ui</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -113,7 +113,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SFML_STATIC;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)source;$(SolutionDir)source/core;$(SolutionDir)source/managers;$(SolutionDir)source/ui;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)source;$(SolutionDir)source/callables;$(SolutionDir)source/core;$(SolutionDir)source/managers;$(SolutionDir)source/ui</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,7 +130,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SFML_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)source;$(SolutionDir)source/core;$(SolutionDir)source/managers;$(SolutionDir)source/ui;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)source;$(SolutionDir)source/callables;$(SolutionDir)source/core;$(SolutionDir)source/managers;$(SolutionDir)source/ui</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -147,7 +147,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SFML_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)source;$(SolutionDir)source/core;$(SolutionDir)source/managers;$(SolutionDir)source/ui;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)source;$(SolutionDir)source/callables;$(SolutionDir)source/core;$(SolutionDir)source/managers;$(SolutionDir)source/ui</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -161,15 +161,15 @@
   <ItemGroup>
     <ClCompile Include="source\core\Input.cpp" />
     <ClCompile Include="source\core\DeltaTime.cpp" />
-    <ClCompile Include="source\core\EngineCallable.cpp" />
+    <ClCompile Include="source\callables\EngineCallable.cpp" />
     <ClCompile Include="source\core\EntryPoint.cpp" />
     <ClCompile Include="source\core\Common.cpp" />
-    <ClCompile Include="source\core\Create.cpp" />
-    <ClCompile Include="source\core\Destroy.cpp" />
-    <ClCompile Include="source\core\Render.cpp" />
-    <ClCompile Include="source\core\Setup.cpp" />
+    <ClCompile Include="source\callables\Create.cpp" />
+    <ClCompile Include="source\callables\Destroy.cpp" />
+    <ClCompile Include="source\callables\Render.cpp" />
+    <ClCompile Include="source\callables\Setup.cpp" />
     <ClCompile Include="source\core\Engine.cpp" />
-    <ClCompile Include="source\core\Update.cpp" />
+    <ClCompile Include="source\callables\Update.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\core\Input.h" />
@@ -179,16 +179,16 @@
     <ClInclude Include="source\core\RandomNumberGenerator.h" />
     <ClInclude Include="source\core\RectangleShape.h" />
     <ClInclude Include="source\core\Clock.h" />
-    <ClInclude Include="source\core\EngineCallable.h" />
+    <ClInclude Include="source\callables\EngineCallable.h" />
     <ClInclude Include="source\core\Font.h" />
     <ClInclude Include="source\core\Music.h" />
     <ClInclude Include="source\core\RenderWindow.h" />
     <ClInclude Include="source\core\Common.h" />
-    <ClInclude Include="source\core\Create.h" />
-    <ClInclude Include="source\core\Destroy.h" />
-    <ClInclude Include="source\core\Render.h" />
+    <ClInclude Include="source\callables\Create.h" />
+    <ClInclude Include="source\callables\Destroy.h" />
+    <ClInclude Include="source\callables\Render.h" />
     <ClInclude Include="source\core\ScaleCalculator.h" />
-    <ClInclude Include="source\core\Setup.h" />
+    <ClInclude Include="source\callables\Setup.h" />
     <ClInclude Include="source\core\Engine.h" />
     <ClInclude Include="source\core\Sound.h" />
     <ClInclude Include="source\core\SoundBuffer.h" />
@@ -196,7 +196,7 @@
     <ClInclude Include="source\core\Text.h" />
     <ClInclude Include="source\core\Texture.h" />
     <ClInclude Include="source\core\ThrowAwayCopyAndPaste.h" />
-    <ClInclude Include="source\core\Update.h" />
+    <ClInclude Include="source\callables\Update.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
