@@ -1,0 +1,19 @@
+#pragma once
+
+#include <iostream>
+#include <vector>
+#include "RenderWindow.h"
+#include "Input.h"
+#include "DeltaTime.h"
+#include "SoundBuffer.h"
+#include "Font.h"
+#include "Texture.h"
+#include "Sound.h"
+#include "Music.h"
+#include "Text.h"
+#include "RectangleShape.h"
+#include "RandomNumberGenerator.h"
+#include "AspectRatioCalculator.h"
+#include "ScaleCalculator.h"
+#include "ObjectManager.h"
+#include "States.h"
