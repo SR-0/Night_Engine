@@ -14,6 +14,18 @@ private:
 
 public:
 
-	static bool clickedOn(sf::RectangleShape& rectangleShape, sf::RenderWindow& window);
+	static bool leftClickPressedOver(sf::RectangleShape& rectangleShape, sf::RenderWindow& window);
+
+public:
+
+	static bool InhibitKeyboard;
+	static bool InhibitKeyboardPress;
+	static bool InhibitKeyboardRelease;
+
+public:
+
+	static bool InhibitMouse;
+	static bool InhibitMousePress;
+	static bool InhibitMouseRelease;
 
 };

@@ -1,6 +1,14 @@
 #include "Input.h"
 
-bool Input::clickedOn(sf::RectangleShape& rectangleShape, sf::RenderWindow& window)
+	bool Input::InhibitKeyboard			= false;
+	bool Input::InhibitKeyboardPress	= false;
+	bool Input::InhibitKeyboardRelease	= false;
+
+	bool Input::InhibitMouse			= false;
+	bool Input::InhibitMousePress		= false;
+	bool Input::InhibitMouseRelease		= false;
+
+bool Input::leftClickPressedOver(sf::RectangleShape& rectangleShape, sf::RenderWindow& window)
 {
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) 
 		&& (sf::Mouse::getPosition(window).x > (int)rectangleShape.getPosition().x) 

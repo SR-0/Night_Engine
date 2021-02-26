@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <vector>
+#include "States.h"
 #include "RenderWindow.h"
 #include "Input.h"
 #include "DeltaTime.h"
@@ -16,4 +17,3 @@
 #include "AspectRatioCalculator.h"
 #include "ScaleCalculator.h"
 #include "ObjectManager.h"
-#include "States.h"

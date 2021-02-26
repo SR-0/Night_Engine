@@ -50,11 +50,6 @@ public:
 	{
 		this->m_CurrentState = &state;
 	}
-	
-	void attachNextState(GAME_STATE& state)
-	{
-		this->m_NextState = &state;
-	}
 
 public:
 
@@ -78,7 +73,7 @@ public:
 		this->m_Sounds = &sounds;
 	}
 
-	void attachMusic(ObjectManager<Music>& music)
+	void attachMusic(ObjectManager<Music*>& music)
 	{
 		this->m_Music = &music;
 	}
@@ -108,7 +103,6 @@ public:
 	sf::Vector2f*	m_Scale				= nullptr;
 	GAME_STATE*		m_PreviousState		= nullptr;
 	GAME_STATE*		m_CurrentState		= nullptr;
-	GAME_STATE*		m_NextState			= nullptr;
 
 public:
 
@@ -116,7 +110,7 @@ public:
 	ObjectManager<Font>*			m_Fonts				= nullptr;
 	ObjectManager<Texture>*			m_Textures			= nullptr;
 	ObjectManager<Sound>*			m_Sounds			= nullptr;
-	ObjectManager<Music>*			m_Music				= nullptr;
+	ObjectManager<Music*>*			m_Music				= nullptr;
 	ObjectManager<Text>*			m_Texts				= nullptr;
 	ObjectManager<RectangleShape>*	m_RectangleShapes	= nullptr;
 

@@ -13,7 +13,7 @@ public:
     {
         T* t = new T(object);
         m_Objects.push_back(std::pair<T, const char*>(*t, id));
-        std::cout << "ObjectManager 'create(const T& t)' function called for - address: " << &*t << " - ID: " << id << "\n";
+        std::cout << "ObjectManager 'create(const T& t)' function called for - memory address: " << &*t << " - ID: " << id << "\n";
         return t;
     }
 
@@ -21,7 +21,7 @@ public:
     {
         T* t = new T(std::move(object));
         m_Objects.push_back(std::pair<T, const char*>(*t, id));
-        std::cout << "ObjectManager 'create(T&&)' function called - address: " << &*t << " - ID: " << id << "\n";
+        std::cout << "ObjectManager 'create(T&&)' function called - memory address: " << &*t << " - ID: " << id << "\n";
         return t;
     }
 
@@ -33,7 +33,7 @@ public:
         {
             if (&*m_Objects[i].second == &*id)
             {
-                //std::cout << "ObjectManager 'get(const char*)' function called - address: " << &m_Objects[i] << " - ID: " << id << " -\n";
+                //std::cout << "ObjectManager 'get(const char*)' function called - memory address: " << &m_Objects[i] << " - ID: " << id << " -\n";
                 return m_Objects[i].first;
             }
         }

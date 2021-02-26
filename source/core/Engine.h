@@ -15,26 +15,31 @@ private:
 
 	/*  // simple, if not barbaric design flow for entire engine:
 
-                                                          -------------		
-                                               / -- -- -> |   Update  | -- -- -> \
-                                               ^          -------------          |
-    ------------          -----------          |                                 |          -------------
-    |  Create  | -- -- -> |  Setup  | -- -- -> |              (LOOP)             | -- -- -> |  Destroy  |
-    ------------          -----------          |                                 |          -------------
-                                               |          -------------          v
-                                               \ <- -- -- |   Render  | <- -- -- /
-                                                          -------------
+                                                 -------------		
+                                         / -- -> |   Update  | -- -> \
+                                         ^       -------------       |
+    ------------       -----------       |                           |       -------------
+    |  Create  | -- -> |  Setup  | -- -> |           (LOOP)          | -- -> |  Destroy  |
+    ------------       -----------       |                           |       -------------
+                                         |       -------------       v
+                                         \ <- -- |   Render  | <- -- /
+                                                 -------------
 
-	*/ // make dirved engine callables or an array of engine callables for each step and use state machine to make specificities
+	*/ // make dirved engine callables (or an array of derived engine callables in the future) for each stage
 
 public:
 
-	// Core functions that handle *all* initialization/creation
+	// Core functions that handle *all* create, setup, update, render, and destroy flows
 	static void CreateCore(EngineCallable& callable, sf::VideoMode videoMode, sf::String title, bool isFullScreen, sf::ContextSettings contextSettings);
 	static void SetupCore(EngineCallable& callable);
 	static void UpdateCore(EngineCallable& callable);
 	static void RenderCore(EngineCallable& callable);
 	static void DestroyCore(EngineCallable& callable);
+
+private:
+
+	// attach all required/critical global variable/object references (required for any derived callable)
+	static void InitiateAttachments(EngineCallable& callable);
 
 public:
 
@@ -52,7 +57,6 @@ public:
 	static sf::Vector2f		s_Scale;
 	static GAME_STATE		s_PreviousState;
 	static GAME_STATE		s_CurrentState;
-	static GAME_STATE		s_NextState;
 
 	
 public:
@@ -62,7 +66,7 @@ public:
 	static ObjectManager<Font>				s_Fonts;
 	static ObjectManager<Texture>			s_Textures;
 	static ObjectManager<Sound>				s_Sounds;
-	static ObjectManager<Music>				s_Music;
+	static ObjectManager<Music*>			s_Music;
 	static ObjectManager<Text>				s_Texts;
 	static ObjectManager<RectangleShape>	s_RectangleShapes;
 

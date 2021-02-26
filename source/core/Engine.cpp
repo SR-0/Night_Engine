@@ -1,13 +1,5 @@
 #include "Engine.h"
 
-
-
-
-
-// sfml includes
-#include <SFML/Graphics/Texture.hpp>
-#include <SFML/Graphics/RectangleShape.hpp>
-
 // core static declaration
 RenderWindow*	Engine::s_RenderWindow;
 unsigned int	Engine::s_RenderLayerCount;
@@ -17,14 +9,13 @@ sf::Vector2f	Engine::s_AspectRatio;
 sf::Vector2f	Engine::s_Scale;
 GAME_STATE		Engine::s_PreviousState;
 GAME_STATE		Engine::s_CurrentState;
-GAME_STATE		Engine::s_NextState;
 
 // object manager static declaration
 ObjectManager<SoundBuffer>		Engine::s_SoundBuffers;
 ObjectManager<Font>				Engine::s_Fonts;
 ObjectManager<Texture>			Engine::s_Textures;
 ObjectManager<Sound>			Engine::s_Sounds;
-ObjectManager<Music>			Engine::s_Music;
+ObjectManager<Music*>			Engine::s_Music;
 ObjectManager<Text>				Engine::s_Texts;
 ObjectManager<RectangleShape>	Engine::s_RectangleShapes;
 
@@ -49,23 +40,7 @@ void Engine::CreateCore(EngineCallable& callable, sf::VideoMode videoMode, sf::S
 	s_RenderInitiated	= false;
 	s_DestroyInitiated	= false;
 
-	callable.attachRenderWindow(		*s_RenderWindow		);
-	callable.attachRenderLayerCount(	s_RenderLayerCount	);
-	callable.attachDeltaTime(			s_DeltaTime			);
-	callable.attachResolution(			s_Resolution		);
-	callable.attachAspectRatio(			s_AspectRatio		);
-	callable.attachScale(				s_Scale				);
-	callable.attachPreviousState(		s_PreviousState		);
-	callable.attachCurrentState(		s_CurrentState		);
-	callable.attachNextState(			s_NextState			);
-
-	callable.attachSoundBuffers(	s_SoundBuffers		);
-	callable.attachFonts(			s_Fonts				);
-	callable.attachTextures(		s_Textures			);
-	callable.attachSounds(			s_Sounds			);
-	callable.attachMusic(			s_Music				);
-	callable.attachTexts(			s_Texts				);
-	callable.attachRectangleShapes(	s_RectangleShapes	);
+	InitiateAttachments(callable);
 
 	callable.execute();
 }
@@ -74,23 +49,7 @@ void Engine::SetupCore(EngineCallable& callable)
 {
 	if (!s_SetupInitiated)
 	{
-		callable.attachRenderWindow(		*s_RenderWindow		);
-		callable.attachRenderLayerCount(	s_RenderLayerCount	);
-		callable.attachDeltaTime(			s_DeltaTime			);
-		callable.attachResolution(			s_Resolution		);
-		callable.attachAspectRatio(			s_AspectRatio		);
-		callable.attachScale(				s_Scale				);
-		callable.attachPreviousState(		s_PreviousState		);
-		callable.attachCurrentState(		s_CurrentState		);
-		callable.attachNextState(			s_NextState			);
-
-		callable.attachSoundBuffers(	s_SoundBuffers		);
-		callable.attachFonts(			s_Fonts				);
-		callable.attachTextures(		s_Textures			);
-		callable.attachSounds(			s_Sounds			);
-		callable.attachMusic(			s_Music				);
-		callable.attachTexts(			s_Texts				);
-		callable.attachRectangleShapes(	s_RectangleShapes	);
+		InitiateAttachments(callable);
 
 		s_SetupInitiated = true;
 
@@ -106,24 +65,7 @@ void Engine::UpdateCore(EngineCallable& callable)
 {
 	if (!s_UpdateInitiated)
 	{
-		callable.attachRenderWindow(		*s_RenderWindow		);
-		callable.attachRenderLayerCount(	s_RenderLayerCount	);
-		callable.attachDeltaTime(			s_DeltaTime			);
-		callable.attachResolution(			s_Resolution		);
-		callable.attachAspectRatio(			s_AspectRatio		);
-		callable.attachScale(				s_Scale				);
-		callable.attachPreviousState(		s_PreviousState		);
-		callable.attachCurrentState(		s_CurrentState		);
-		callable.attachNextState(			s_NextState			);
-
-
-		callable.attachSoundBuffers(	s_SoundBuffers		);
-		callable.attachFonts(			s_Fonts				);
-		callable.attachTextures(		s_Textures			);
-		callable.attachSounds(			s_Sounds			);
-		callable.attachMusic(			s_Music				);
-		callable.attachTexts(			s_Texts				);
-		callable.attachRectangleShapes(	s_RectangleShapes	);
+		InitiateAttachments(callable);
 
 		s_UpdateInitiated = true;
 
@@ -139,23 +81,7 @@ void Engine::RenderCore(EngineCallable& callable)
 {
 	if (!s_RenderInitiated)
 	{
-		callable.attachRenderWindow(		*s_RenderWindow		);
-		callable.attachRenderLayerCount(	s_RenderLayerCount	);
-		callable.attachDeltaTime(			s_DeltaTime			);
-		callable.attachResolution(			s_Resolution		);
-		callable.attachAspectRatio(			s_AspectRatio		);
-		callable.attachScale(				s_Scale				);
-		callable.attachPreviousState(		s_PreviousState		);
-		callable.attachCurrentState(		s_CurrentState		);
-		callable.attachNextState(			s_NextState			);
-
-		callable.attachSoundBuffers(	s_SoundBuffers		);
-		callable.attachFonts(			s_Fonts				);
-		callable.attachTextures(		s_Textures			);
-		callable.attachSounds(			s_Sounds			);
-		callable.attachMusic(			s_Music				);
-		callable.attachTexts(			s_Texts				);
-		callable.attachRectangleShapes(	s_RectangleShapes	);
+		InitiateAttachments(callable);
 
 		s_RenderInitiated = true;
 
@@ -171,23 +97,7 @@ void Engine::DestroyCore(EngineCallable& callable)
 {
 	if (!s_DestroyInitiated)
 	{
-		callable.attachRenderWindow(		*s_RenderWindow		);
-		callable.attachRenderLayerCount(	s_RenderLayerCount	);
-		callable.attachDeltaTime(			s_DeltaTime			);
-		callable.attachResolution(			s_Resolution		);
-		callable.attachAspectRatio(			s_AspectRatio		);
-		callable.attachScale(				s_Scale				);
-		callable.attachPreviousState(		s_PreviousState		);
-		callable.attachCurrentState(		s_CurrentState		);
-		callable.attachNextState(			s_NextState			);
-
-		callable.attachSoundBuffers(	s_SoundBuffers		);
-		callable.attachFonts(			s_Fonts				);
-		callable.attachTextures(		s_Textures			);
-		callable.attachSounds(			s_Sounds			);
-		callable.attachMusic(			s_Music				);
-		callable.attachTexts(			s_Texts				);
-		callable.attachRectangleShapes(	s_RectangleShapes	);
+		InitiateAttachments(callable);
 
 		s_DestroyInitiated = true;
 		
@@ -207,11 +117,39 @@ void Engine::DestroyCore(EngineCallable& callable)
 
 
 
+#pragma region ATTACH CALLABLE REFERENCES
+
+void Engine::InitiateAttachments(EngineCallable& callable)
+{
+	callable.attachRenderWindow(		*s_RenderWindow		);
+	callable.attachRenderLayerCount(	s_RenderLayerCount	);
+	callable.attachDeltaTime(			s_DeltaTime			);
+	callable.attachResolution(			s_Resolution		);
+	callable.attachAspectRatio(			s_AspectRatio		);
+	callable.attachScale(				s_Scale				);
+	callable.attachPreviousState(		s_PreviousState		);
+	callable.attachCurrentState(		s_CurrentState		);
+	
+	callable.attachSoundBuffers(	s_SoundBuffers		);
+	callable.attachFonts(			s_Fonts				);
+	callable.attachTextures(		s_Textures			);
+	callable.attachSounds(			s_Sounds			);
+	callable.attachMusic(			s_Music				);
+	callable.attachTexts(			s_Texts				);
+	callable.attachRectangleShapes(	s_RectangleShapes	);
+}
+
+#pragma endregion ATTACH CALLABLE REFERENCES
+
+
+
+
+
 #pragma region RETURN FUNCTIONS
 
 bool Engine::IsRunning()
 {
-	return (s_RenderWindow->isOpen());
+	return s_RenderWindow->isOpen();
 }
 
 #pragma endregion RETURN FUNCTIONS

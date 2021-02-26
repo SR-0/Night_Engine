@@ -6,34 +6,43 @@ class Update : public EngineCallable
 {
 public:
 
-	virtual void execute();
+	void execute();
 
 public:
 
-	virtual void updateAll();
+	void updateAll();
 	
 public:
 
-	virtual void updateDelta();
-	virtual void updateEvent();
-	virtual void updateState();
+	void updateDelta();
+	void updateEvent();
+	void updateState();
 
 public:
 
-	virtual void updateTitle();
-	virtual void updateLoad();
-	virtual void updatePlay();
-	virtual void updatePause();
-	virtual void updateSave();
-	virtual void updateExit();
-
-private:
-
-	bool m_InhibitPressed	= false;
-	bool m_InhibitReleased	= false;
+	void updateTitle();
+	void updateLoad();
+	void updatePlay();
+	void updatePause();
+	void updateSave();
+	void updateExit();
 
 public:
 
-	const float fadeSpeed = 5.f;
+public:
+
+	// generic fade in and out speeds for splash, background, buttons, and entities
+	const float m_FadeSpeed = 7.f;
+
+	// choice checks (make into enums soon)
+	TITLE_STATE m_TitleState	= TITLE_STATE::START;
+	PLAY_STATE	m_PlayState		= PLAY_STATE::START;
+
+	//bool titleStart				= true;
+	//bool titleChoicePlay		= false;
+	//bool titleChoiceGameMode	= false;
+	//bool titleChoiceScreenMode	= false;
+	//bool titleChoiceResolution	= false;
+	//bool titleChoiceQuit		= false;
 
 };

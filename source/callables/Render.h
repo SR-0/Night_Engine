@@ -6,6 +6,6 @@ class Render : public EngineCallable
 {
 public:
 
-	virtual void execute();
+	void execute();
 
 };

@@ -6,6 +6,9 @@ class Music : public sf::Music
 {
 public:
 
-	Music() : sf::Music() {};
+	Music() : sf::Music()
+	{
+
+	}
 
 };

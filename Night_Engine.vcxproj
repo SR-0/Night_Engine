@@ -161,7 +161,6 @@
   <ItemGroup>
     <ClCompile Include="source\core\Input.cpp" />
     <ClCompile Include="source\core\DeltaTime.cpp" />
-    <ClCompile Include="source\callables\EngineCallable.cpp" />
     <ClCompile Include="source\core\EntryPoint.cpp" />
     <ClCompile Include="source\core\Common.cpp" />
     <ClCompile Include="source\callables\Create.cpp" />
@@ -179,7 +178,7 @@
     <ClInclude Include="source\core\RandomNumberGenerator.h" />
     <ClInclude Include="source\core\RectangleShape.h" />
     <ClInclude Include="source\core\Clock.h" />
-    <ClInclude Include="source\callables\EngineCallable.h" />
+    <ClInclude Include="source\core\EngineCallable.h" />
     <ClInclude Include="source\core\Font.h" />
     <ClInclude Include="source\core\Music.h" />
     <ClInclude Include="source\core\RenderWindow.h" />

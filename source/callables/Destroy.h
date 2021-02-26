@@ -6,22 +6,22 @@ class Destroy : public EngineCallable
 {
 public:
 
-	virtual void execute();
+	void execute();
 
 public:
 
-	virtual void destroyAll();
+	void destroyAll();
 
 public:
 
-	virtual void destroyCore();
-	virtual void destroySoundBuffers();
-	virtual void destroyFonts();
-	virtual void destroyTextures();
-	virtual void destroySounds();
-	virtual void destroyMusic();
-	virtual void destroyTexts();
-	virtual void destroyRectangleShapes();
+	void destroyCore();
+	void destroySoundBuffers();
+	void destroyFonts();
+	void destroyTextures();
+	void destroySounds();
+	void destroyMusic();
+	void destroyTexts();
+	void destroyRectangleShapes();
 
 };
 

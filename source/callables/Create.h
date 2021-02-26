@@ -6,21 +6,21 @@ class Create : public EngineCallable
 {
 public:
 
-	virtual void execute();
+	void execute();
 	
 public:
 	
-	virtual void createAll();
+	void createAll();
 
 public:
 
-	virtual void createCore();
-	virtual void createSoundBuffers();
-	virtual void createFonts();
-	virtual void createTextures();
-	virtual void createSounds();
-	virtual void createMusic();
-	virtual void createTexts();
-	virtual void createRectangleShapes();
+	void createCore();
+	void createSoundBuffers();
+	void createFonts();
+	void createTextures();
+	void createSounds();
+	void createMusic();
+	void createTexts();
+	void createRectangleShapes();
 
 };
