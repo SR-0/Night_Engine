@@ -48,16 +48,23 @@ public:
 
 public:
 
-	// global engine variables/objects that need to be attached to 'engine callables'
-	static RenderWindow*	s_RenderWindow;
-	static unsigned int		s_RenderLayerCount;
-	static DeltaTime		s_DeltaTime;
-	static sf::Vector2f		s_Resolution;
-	static sf::Vector2f		s_AspectRatio;
-	static sf::Vector2f		s_Scale;
-	static GAME_STATE		s_PreviousState;
-	static GAME_STATE		s_CurrentState;
+	// critical global engine variables/objects that need to be attached to 'engine callables'
+	static RenderWindow*		s_RenderWindow;
+	static sf::VideoMode		s_VideoMode;
+	static sf::String			s_Title;
+	static sf::Uint32			s_Style;
+	static sf::ContextSettings	s_ContextSettings;
+	static unsigned int			s_RenderLayerCount;
+	static DeltaTime			s_DeltaTime;
+	static sf::Vector2f			s_Resolution;
+	static sf::Vector2f			s_AspectRatio;
+	static sf::Vector2f			s_Scale;
+	static GAME_STATE			s_PreviousState;
+	static GAME_STATE			s_CurrentState;
 
+public:
+
+	// engine class references only
 	
 public:
 
@@ -77,6 +84,14 @@ public:
 	static bool	s_UpdateInitiated;
 	static bool	s_RenderInitiated;
 	static bool	s_DestroyInitiated;
+
+public:
+
+	static EngineCallable*	s_Create;
+	static EngineCallable*	s_Setup;
+	static EngineCallable*	s_Update;
+	static EngineCallable*	s_Render;
+	static EngineCallable*	s_Destroy;
 
 };
 

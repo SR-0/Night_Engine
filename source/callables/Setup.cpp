@@ -28,6 +28,10 @@ void Setup::setupCore()
 	*m_Scale			= sf::Vector2f(ScaleCalculator::GetScale(*m_Resolution, *m_AspectRatio));
 	*m_PreviousState	= GAME_STATE::NONE;
 	*m_CurrentState		= GAME_STATE::TITLE;
+
+	std::cout << "Resolution: " << m_Resolution->x << "," << m_Resolution->y << "\n";
+	std::cout << "ApesctRatio: " << m_AspectRatio->x << "," << m_AspectRatio->y << "\n";
+	std::cout << "Scale: " << m_Scale->x << "," << m_Scale->y << "\n";
 }
 
 void Setup::setupSoundBuffers()
@@ -65,8 +69,7 @@ void Setup::setupSounds()
 
 void Setup::setupMusic()
 {
-	m_Music->get("MusicAmbient")->openFromFile("resource/music/pong/inner_light.wav"); 
-	m_Music->get("MusicAmbient")->play();
+	m_Music->get("MusicAmbient")->setVolume(100);
 }
 
 void Setup::setupTexts()
@@ -154,7 +157,7 @@ void Setup::setupTexts()
 	m_Texts->get("TextPlayerRightID").setString(	"Player Right");
 	m_Texts->get("TextPlayerRightScore").setString(	"Score: 0");
 	m_Texts->get("TextPlayerRightRank").setString(	"Rank: // TO DO");
-	m_Texts->get("TextMessage").setString(			"Game Starting In...");
+	m_Texts->get("TextMessage").setString(			"Game Starting In... 3");
 
 	m_Texts->get("TextTitleID").setPosition(			(300	*	m_Scale->x)	,	(14		*	m_Scale->y)		);
 	m_Texts->get("TextTitleVersion").setPosition(		(300	*	m_Scale->x)	,	(95		*	m_Scale->y)		);
@@ -220,7 +223,7 @@ void Setup::setupRectangleShapes()
 	m_RectangleShapes->get("PongBall").setTexture(			&m_Textures->get("TexturePongBall")		);
 
 
-	m_RectangleShapes->get("Background").setSize(		sf::Vector2f(	*m_Resolution									)	);
+	m_RectangleShapes->get("Background").setSize(		sf::Vector2f(	m_Textures->get("TextureBackground").getSize()	)	);
 	m_RectangleShapes->get("ButtonPlay").setSize(		sf::Vector2f(	m_Resolution->x		,	25						)	);
 	m_RectangleShapes->get("ButtonGameMode").setSize(	sf::Vector2f(	m_Resolution->x		,	25						)	);
 	m_RectangleShapes->get("ButtonScreenMode").setSize(	sf::Vector2f(	m_Resolution->x		,	25						)	);

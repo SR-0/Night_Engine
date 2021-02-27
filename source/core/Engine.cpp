@@ -1,14 +1,19 @@
 #include "Engine.h"
 
 // core static declaration
-RenderWindow*	Engine::s_RenderWindow;
-unsigned int	Engine::s_RenderLayerCount;
-DeltaTime		Engine::s_DeltaTime;
-sf::Vector2f	Engine::s_Resolution;
-sf::Vector2f	Engine::s_AspectRatio;
-sf::Vector2f	Engine::s_Scale;
-GAME_STATE		Engine::s_PreviousState;
-GAME_STATE		Engine::s_CurrentState;
+RenderWindow*		Engine::s_RenderWindow;
+sf::VideoMode		Engine::s_VideoMode;
+sf::String			Engine::s_Title;
+sf::Uint32			Engine::s_Style;
+sf::ContextSettings	Engine::s_ContextSettings;
+unsigned int		Engine::s_RenderLayerCount;
+DeltaTime			Engine::s_DeltaTime;
+sf::Vector2f		Engine::s_Resolution;
+sf::Vector2f		Engine::s_AspectRatio;
+sf::Vector2f		Engine::s_Scale;
+GAME_STATE			Engine::s_PreviousState;
+GAME_STATE			Engine::s_CurrentState;
+
 
 // object manager static declaration
 ObjectManager<SoundBuffer>		Engine::s_SoundBuffers;
@@ -25,6 +30,12 @@ bool Engine::s_UpdateInitiated;
 bool Engine::s_RenderInitiated;
 bool Engine::s_DestroyInitiated;
 
+// pointers to callables for certain use cases
+EngineCallable* Engine::s_Create;
+EngineCallable* Engine::s_Setup;
+EngineCallable* Engine::s_Update;
+EngineCallable* Engine::s_Render;
+EngineCallable* Engine::s_Destroy;
 
 
 
@@ -33,12 +44,17 @@ bool Engine::s_DestroyInitiated;
 
 void Engine::CreateCore(EngineCallable& callable, sf::VideoMode videoMode, sf::String title, bool isFullScreen, sf::ContextSettings contextSettings)
 {
-	s_RenderWindow		= new RenderWindow(videoMode, title, (isFullScreen ? sf::Style::Fullscreen : sf::Style::None), contextSettings);
-	
+	s_VideoMode			= videoMode;
+	s_Title				= title;
+	s_Style				= (isFullScreen ? sf::Style::Fullscreen : sf::Style::None);
+	s_ContextSettings	= contextSettings;
+	s_RenderWindow		= new RenderWindow(s_VideoMode, s_Title, s_Style, s_ContextSettings);
 	s_SetupInitiated	= false;
 	s_UpdateInitiated	= false;
 	s_RenderInitiated	= false;
 	s_DestroyInitiated	= false;
+
+	s_Create = &callable;
 
 	InitiateAttachments(callable);
 
@@ -49,6 +65,8 @@ void Engine::SetupCore(EngineCallable& callable)
 {
 	if (!s_SetupInitiated)
 	{
+		s_Setup = &callable;
+
 		InitiateAttachments(callable);
 
 		s_SetupInitiated = true;
@@ -63,13 +81,22 @@ void Engine::SetupCore(EngineCallable& callable)
 
 void Engine::UpdateCore(EngineCallable& callable)
 {
+
 	if (!s_UpdateInitiated)
 	{
+		s_Update = &callable;
+
 		InitiateAttachments(callable);
 
 		s_UpdateInitiated = true;
 
 		UpdateCore(callable);
+	}
+	else if (s_CurrentState == GAME_STATE::NONE)
+	{
+		SetupCore(*s_Setup);
+
+		s_CurrentState = GAME_STATE::TITLE;
 	}
 	else
 	{
@@ -81,6 +108,8 @@ void Engine::RenderCore(EngineCallable& callable)
 {
 	if (!s_RenderInitiated)
 	{
+		s_Render = &callable;
+
 		InitiateAttachments(callable);
 
 		s_RenderInitiated = true;
@@ -97,7 +126,11 @@ void Engine::DestroyCore(EngineCallable& callable)
 {
 	if (!s_DestroyInitiated)
 	{
+		s_Destroy = &callable;
+
 		InitiateAttachments(callable);
+
+		s_RenderWindow->close();
 
 		s_DestroyInitiated = true;
 		
@@ -106,8 +139,6 @@ void Engine::DestroyCore(EngineCallable& callable)
 	else
 	{
 		callable.execute();
-
-		delete s_RenderWindow;
 	}
 }
 
@@ -122,6 +153,10 @@ void Engine::DestroyCore(EngineCallable& callable)
 void Engine::InitiateAttachments(EngineCallable& callable)
 {
 	callable.attachRenderWindow(		*s_RenderWindow		);
+	callable.attachVideoMode(			s_VideoMode			);
+	callable.attachTitle(				s_Title				);
+	callable.attachStyle(				s_Style				);
+	callable.attachContextSettings(		s_ContextSettings	);
 	callable.attachRenderLayerCount(	s_RenderLayerCount	);
 	callable.attachDeltaTime(			s_DeltaTime			);
 	callable.attachResolution(			s_Resolution		);

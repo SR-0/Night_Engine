@@ -57,7 +57,9 @@ void Create::createSounds()
 
 void Create::createMusic()
 {
-	m_Music->create(new Music(), "MusicAmbient"); 
+	m_Music->create(new Music(), "MusicAmbient"); // music needs to open here until better idea for restart on reset
+
+	m_Music->get("MusicAmbient")->openFromFile("resource/music/pong/inner_light.wav");
 }
 
 void Create::createTexts()

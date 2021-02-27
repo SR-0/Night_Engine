@@ -8,6 +8,8 @@ enum class GAME_STATE
 	PLAY,
 	PAUSE,
 	SAVE,
+	RESET_MINIMAL,
+	RESET,
 	EXIT
 };
 

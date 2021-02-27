@@ -14,6 +14,13 @@ public:
 
 public:
 
+	void setRestart(const sf::Time& time);
+	void setElapsed(const sf::Time& time);
+	void setTimerStart(const sf::Time& time);
+	void setTimerEnd(const sf::Time& time);
+
+public:
+
 	sf::Time		getRestart();
 	sf::Time		getElapsed();
 	sf::Time		getTimerStart();

@@ -25,6 +25,7 @@ public:
 	void updatePlay();
 	void updatePause();
 	void updateSave();
+	void updateReset();
 	void updateExit();
 
 public:
@@ -34,15 +35,8 @@ public:
 	// generic fade in and out speeds for splash, background, buttons, and entities
 	const float m_FadeSpeed = 7.f;
 
-	// choice checks (make into enums soon)
+	// choice checks
 	TITLE_STATE m_TitleState	= TITLE_STATE::START;
 	PLAY_STATE	m_PlayState		= PLAY_STATE::START;
-
-	//bool titleStart				= true;
-	//bool titleChoicePlay		= false;
-	//bool titleChoiceGameMode	= false;
-	//bool titleChoiceScreenMode	= false;
-	//bool titleChoiceResolution	= false;
-	//bool titleChoiceQuit		= false;
 
 };

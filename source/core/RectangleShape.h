@@ -103,46 +103,6 @@ public:
 
 public:
 
-	//void growWidth(float speed, float maximum)
-	//{
-	//	if ( (speed > 0) && (getSize().x + speed) >= abs(maximum) )
-	//	{
-	//		setSize(sf::Vector2f(abs(maximum), getSize().y));
-	//	}
-	//	else if ( (speed < 0) && (getSize().x - speed) <= - abs(maximum) )
-	//	{
-	//		setSize(sf::Vector2f( - abs(maximum), getSize().y) );
-	//	}
-	//	else
-	//	{
-	//		setSize(sf::Vector2f(getSize().x + speed, getSize().y));
-	//	}
-	//}
-	//
-	//void growHeight(float speed, float maximum)
-	//{
-	//	if ( (speed > 0) && (getSize().y + speed) >= abs(maximum))
-	//	{
-	//		setSize(sf::Vector2f(getSize().x, abs(maximum)));
-	//	}
-	//	else if ( (speed > 0) && (getSize().y - speed) <= - abs(maximum))
-	//	{
-	//		setSize(sf::Vector2f(getSize().x, - abs(maximum)));
-	//	}
-	//	else
-	//	{
-	//		setSize(sf::Vector2f(getSize().x, getSize().y + speed));
-	//	}
-	//}
-	//
-	//void growSize(float speedX, float speedY, float maximumX, float maximumY)
-	//{
-	//	growWidth(speedX, maximumX);
-	//	growHeight(speedY, maximumY);
-	//}
-
-public:
-
 	void setSpeed(const sf::Vector2f& speed)
 	{
 		this->m_Speed = speed;

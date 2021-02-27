@@ -18,6 +18,26 @@ void DeltaTime::update()
 	}
 }
 
+void DeltaTime::setRestart(const sf::Time& time)
+{
+	m_Restart = time;
+}
+
+void DeltaTime::setElapsed(const sf::Time& time)
+{
+	m_Elapsed = time;
+}
+
+void DeltaTime::setTimerStart(const sf::Time& time)
+{
+	m_TimerStart = time;
+}
+
+void DeltaTime::setTimerEnd(const sf::Time& time)
+{
+	m_TimerEnd = time;
+}
+
 sf::Time DeltaTime::getRestart()
 {
 	return m_Restart;

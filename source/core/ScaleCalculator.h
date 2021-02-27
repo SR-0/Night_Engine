@@ -17,7 +17,7 @@ public:
 			( (int)apectRatio.x == 21 ) &&
 			( (int)apectRatio.y == 9  ) )
 		{
-			if (resolution.x == 3040 && resolution.y == 1440) { return sf::Vector2f(2.375f,	2.0f); } // add more later
+			if (resolution.x == 3040 && resolution.y == 1440) { return sf::Vector2f(2.375f,	2.0f); } // add more 21:9 later
 		}
 		else if (
 			( (int)apectRatio.x == 16 ) &&

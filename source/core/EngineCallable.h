@@ -16,6 +16,26 @@ public:
 		this->m_RenderWindow = &renderWindow;
 	}
 
+	void attachVideoMode(sf::VideoMode& videoMode)
+	{
+		this->m_VideoMode = &videoMode;
+	}
+
+	void attachTitle(sf::String& title)
+	{
+		this->m_Title = &title;
+	}
+
+	void attachStyle(sf::Uint32& style)
+	{
+		this->m_Style = &style;
+	}
+
+	void attachContextSettings(sf::ContextSettings& contextSettings)
+	{
+		this->m_ContextSettings = &contextSettings;
+	}
+
 	void attachRenderLayerCount(unsigned int& renderLayerCount)
 	{
 		this->m_RenderLayerCount = &renderLayerCount;
@@ -90,19 +110,48 @@ public:
 
 public:
 
+	//void detachAll()
+	//{
+	//	delete m_RenderWindow;		//= nullptr;
+	//	delete m_VideoMode;			//= nullptr;
+	//	delete m_Title;				//= nullptr;
+	//	delete m_Style;				//= nullptr;
+	//	delete m_ContextSettings;	//= nullptr;
+	//	delete m_RenderLayerCount;	//= nullptr;
+	//	delete m_DeltaTime;			//= nullptr;
+	//	delete m_Resolution;		//= nullptr;
+	//	delete m_AspectRatio;		//= nullptr;
+	//	delete m_Scale;				//= nullptr;
+	//	delete m_PreviousState;		//= nullptr;
+	//	delete m_CurrentState;		//= nullptr;
+	//						
+	//	delete m_SoundBuffers;		//= nullptr;
+	//	delete m_Fonts;				//= nullptr;
+	//	delete m_Textures;			//= nullptr;
+	//	delete m_Sounds;			//= nullptr;
+	//	delete m_Music;				//= nullptr;
+	//	delete m_Texts;				//= nullptr;
+	//	delete m_RectangleShapes;	//= nullptr;
+	//}
+
+public:
+
 	virtual void execute() = 0;
 
 public:
 
-
-	RenderWindow*	m_RenderWindow		= nullptr;
-	unsigned int*	m_RenderLayerCount	= nullptr;
-	DeltaTime*		m_DeltaTime			= nullptr;
-	sf::Vector2f*	m_Resolution		= nullptr;
-	sf::Vector2f*	m_AspectRatio		= nullptr;
-	sf::Vector2f*	m_Scale				= nullptr;
-	GAME_STATE*		m_PreviousState		= nullptr;
-	GAME_STATE*		m_CurrentState		= nullptr;
+	RenderWindow*			m_RenderWindow		= nullptr;
+	sf::VideoMode*			m_VideoMode			= nullptr;
+	sf::String*				m_Title				= nullptr;
+	sf::Uint32*				m_Style				= nullptr;
+	sf::ContextSettings*	m_ContextSettings	= nullptr;
+	unsigned int*			m_RenderLayerCount	= nullptr;
+	DeltaTime*				m_DeltaTime			= nullptr;
+	sf::Vector2f*			m_Resolution		= nullptr;
+	sf::Vector2f*			m_AspectRatio		= nullptr;
+	sf::Vector2f*			m_Scale				= nullptr;
+	GAME_STATE*				m_PreviousState		= nullptr;
+	GAME_STATE*				m_CurrentState		= nullptr;
 
 public:
 

@@ -20,7 +20,7 @@ void Render::execute()
 		}
 
 		// draw texts - always after (or on top of) rectangles in same remder layer for now
-		for (unsigned int position = 0; position < m_RectangleShapes->objectCount(); position++)
+		for (unsigned int position = 0; position < m_Texts->objectCount(); position++)
 		{
 			// check if text is enabled to be rendered and if its on this render layer
 			if (m_Texts->get(position).isRenderEnabled() && m_Texts->get(position).getRenderLayer() == renderLayer)

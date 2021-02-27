@@ -13,14 +13,14 @@ public:
 	static sf::Vector2f GetAspectRatio(const sf::Vector2f& resolution)
 	{
 		if (
-			( (int)resolution.x % 21	== 0 ) &&
-			( (int)resolution.y % 9		== 0 ) )
+			( (int)resolution.x % 21 == 0 ) &&
+			( (int)resolution.y % 9  == 0 ) )
 		{
 			return sf::Vector2f(21.f, 9.f);
 		}
 		else if (
-			( (int)resolution.x % 16	== 0 ) &&
-			( (int)resolution.y % 9		== 0 ) )
+			( (int)resolution.x % 16 == 0 ) &&
+			( (int)resolution.y % 9  == 0 ) )
 		{
 			return sf::Vector2f(16.f, 9.f);
 		}
@@ -30,6 +30,8 @@ public:
 		{
 			return sf::Vector2f(4.f, 3.f);
 		}
+
+		// gonna have to handle more elegantly soon
 	}
 
 };

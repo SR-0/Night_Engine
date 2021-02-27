@@ -79,22 +79,38 @@ void Update::updateEvent()
 					{
 						switch (event.mouseButton.button)
 						{
-							if (*m_CurrentState == GAME_STATE::TITLE)
+							case sf::Mouse::Left:
 							{
-								case sf::Mouse::Left:
+								if (*m_CurrentState == GAME_STATE::TITLE)
 								{
 									if (Input::leftClickPressedOver(m_RectangleShapes->get("ButtonPlay"), *m_RenderWindow))
 									{
 										m_TitleState = TITLE_STATE::CHOICE_PLAY;
 									}
 
-									if (Input::leftClickPressedOver(m_RectangleShapes->get("ButtonQuit"), *m_RenderWindow))
+									else if (Input::leftClickPressedOver(m_RectangleShapes->get("ButtonScreenMode"), *m_RenderWindow))
+									{
+										m_TitleState = TITLE_STATE::CHOICE_SCREEN_MODE;
+									}
+
+									else if (Input::leftClickPressedOver(m_RectangleShapes->get("ButtonResolution"), *m_RenderWindow))
+									{
+										m_TitleState = TITLE_STATE::CHOICE_RESOLUTION;
+									}
+
+									else if (Input::leftClickPressedOver(m_RectangleShapes->get("ButtonQuit"), *m_RenderWindow))
 									{
 										m_TitleState = TITLE_STATE::CHOICE_QUIT;
 									}
 								}
-								break;
 							}
+							break;
+
+							case sf::Mouse::Right:
+							{
+								// TO DO
+							}
+							break;
 						}
 					}
 					break;
@@ -147,6 +163,12 @@ void Update::updateState()
 		}
 		break;
 
+		case GAME_STATE::RESET:
+		{
+			updateReset();
+		}
+		break;
+
 		case GAME_STATE::EXIT:
 		{
 			updateExit();
@@ -167,9 +189,14 @@ void Update::updateTitle()
 	static RectangleShape*	buttonQuit			= &m_RectangleShapes->get("ButtonQuit");
 	static RectangleShape*	splashScreen		= &m_RectangleShapes->get("SplashScreen");
 
-	// fade ins
 	if (m_TitleState == TITLE_STATE::START)
 	{
+		// music start
+		if (m_Music->get("MusicAmbient")->getStatus() == sf::Music::Status::Stopped)
+		{
+			m_Music->get("MusicAmbient")->play();
+		}
+
 		// fade out splash screen
 		if (!splashScreen->isTransparent())
 		{
@@ -198,14 +225,13 @@ void Update::updateTitle()
 		}
 	}
 
-	// fade outs and state switch to GAME_STATE::PLAY
 	else if (m_TitleState == TITLE_STATE::CHOICE_PLAY)
 	{
 		// highlight for clicking button or pressing hotkey for 'Play'
-		if (buttonPlay->getFillColor().r < 35)
+		if (buttonPlay->getFillColor().r < 50)
 		{
 			soundOk->play();
-			buttonPlay->setFillColor(sf::Color(35, 35, 35, 100));
+			buttonPlay->setFillColor(sf::Color(50, 50, 50, 100));
 		}
 
 		// fade out buttons
@@ -239,13 +265,6 @@ void Update::updateTitle()
 				m_Texts->get("TextTitleResolution").setRenderEnabled(	false	);
 				m_Texts->get("TextTitleQuit").setRenderEnabled(			false	);
 				m_Texts->get("TextTitleDetails").setRenderEnabled(		false	);
-				m_Texts->get("TextMessage").setRenderEnabled(			true	);
-				m_Texts->get("TextPlayerLeftID").setRenderEnabled(		true	);
-				m_Texts->get("TextPlayerLeftScore").setRenderEnabled(	true	);
-				m_Texts->get("TextPlayerLeftRank").setRenderEnabled(	true	);
-				m_Texts->get("TextPlayerRightID").setRenderEnabled(		true	);
-				m_Texts->get("TextPlayerRightScore").setRenderEnabled(	true	);
-				m_Texts->get("TextPlayerRightRank").setRenderEnabled(	true	);
 
 				buttonPlay->setFillColor(sf::Color(0, 0, 0, 0));
 
@@ -256,14 +275,13 @@ void Update::updateTitle()
 		}
 	}
 
-	// fade outs and state switch to GAME_STATE::Exit
-	else if (m_TitleState == TITLE_STATE::CHOICE_QUIT)
+	else if (m_TitleState == TITLE_STATE::CHOICE_SCREEN_MODE)
 	{
-		// highlight for clicking button or pressing hotkey for 'Quit'
-		if (buttonQuit->getFillColor().r < 35)
+		// highlight for clicking button or pressing hotkey for 'ScreenMOde'
+		if (buttonScreenMode->getFillColor().r < 50)
 		{
 			soundOk->play();
-			buttonQuit->setFillColor(sf::Color(35, 35, 35, 100));
+			buttonScreenMode->setFillColor(sf::Color(50, 50, 50, 100));
 		}
 
 		// fade out buttons
@@ -291,6 +309,135 @@ void Update::updateTitle()
 			{
 				buttonQuit->setFillColor(sf::Color(0, 0, 0, 0));
 
+				if (*m_Style == sf::Style::Fullscreen)
+				{
+					*m_Style = sf::Style::None;
+					m_Texts->get("TextTitleScreenMode").setString("Borderless");
+				}
+				else if (*m_Style == sf::Style::None)
+				{
+					*m_Style = sf::Style::Fullscreen;
+					m_Texts->get("TextTitleScreenMode").setString("Fullscreen");
+
+				}
+
+				m_TitleState = TITLE_STATE::START;
+				*m_PreviousState = *m_CurrentState;
+				*m_CurrentState = GAME_STATE::RESET;
+			}
+		}
+	}
+
+	// fade outs and state switch to GAME_STATE::Exit
+	else if (m_TitleState == TITLE_STATE::CHOICE_RESOLUTION)
+	{
+		// highlight for clicking button or pressing hotkey for 'Resolution'
+		if (buttonResolution->getFillColor().r < 50)
+		{
+			soundOk->play();
+			buttonResolution->setFillColor(sf::Color(50, 50, 50, 100));
+		}
+
+		// fade out buttons
+		else if (!buttonPlay->isTransparent())
+		{
+			buttonPlay->fadeOut(m_FadeSpeed);
+			buttonGameMode->fadeOut(m_FadeSpeed);
+			buttonScreenMode->fadeOut(m_FadeSpeed);
+			buttonResolution->fadeOut(m_FadeSpeed);
+			buttonQuit->fadeOut(m_FadeSpeed);
+		}
+
+		// fade out background
+		else if (!background->isTransparent())
+		{
+			background->fadeOut(m_FadeSpeed);
+		}
+
+		// fade out splash screen
+		else if (!splashScreen->isOpaque())
+		{
+			splashScreen->fadeIn(m_FadeSpeed);
+
+			if (splashScreen->isOpaque())
+			{
+				buttonQuit->setFillColor(sf::Color(0, 0, 0, 0));
+
+				if (*m_Resolution == sf::Vector2f(1280, 720))
+				{
+					*m_Resolution = sf::Vector2f(1600, 900);
+				}
+				else if (*m_Resolution == sf::Vector2f(1600, 900))
+				{
+					*m_Resolution = sf::Vector2f(1920, 1080);
+				}
+				else if (*m_Resolution == sf::Vector2f(1920, 1080))
+				{
+					*m_Resolution = sf::Vector2f(2560, 1440);
+				}
+				else if (*m_Resolution == sf::Vector2f(2560, 1440))
+				{
+					*m_Resolution = sf::Vector2f(3840, 2160);
+				}
+				else if (*m_Resolution == sf::Vector2f(3840, 2160))
+				{
+					*m_Resolution = sf::Vector2f(5120, 2880);
+				}
+				else if (*m_Resolution == sf::Vector2f(5120, 2880))
+				{
+					*m_Resolution = sf::Vector2f(7680, 4320);
+				}
+				else if (*m_Resolution == sf::Vector2f(7680, 4320))
+				{
+					*m_Resolution = sf::Vector2f(3040, 1440);
+				}
+				else if (*m_Resolution == sf::Vector2f(3040, 1440))
+				{
+					*m_Resolution = sf::Vector2f(1280, 720);
+				}
+
+				m_TitleState = TITLE_STATE::START;
+				*m_PreviousState = *m_CurrentState;
+				*m_CurrentState = GAME_STATE::RESET;
+			}
+		}
+	}
+
+	// fade outs and state switch to GAME_STATE::Exit
+	else if (m_TitleState == TITLE_STATE::CHOICE_QUIT)
+	{
+		// highlight for clicking button or pressing hotkey for 'Quit'
+		if (buttonQuit->getFillColor().r < 50)
+		{
+			soundOk->play();
+			buttonQuit->setFillColor(sf::Color(50, 50, 50, 100));
+		}
+
+		// fade out buttons
+		else if (!buttonPlay->isTransparent())
+		{
+			buttonPlay->fadeOut(m_FadeSpeed);
+			buttonGameMode->fadeOut(m_FadeSpeed);
+			buttonScreenMode->fadeOut(m_FadeSpeed);
+			buttonResolution->fadeOut(m_FadeSpeed);
+			buttonQuit->fadeOut(m_FadeSpeed);
+		}
+
+		// fade out background
+		else if (!background->isTransparent())
+		{
+			background->fadeOut(m_FadeSpeed);
+		}
+
+		// fade out splash screen
+		else if (!splashScreen->isOpaque())
+		{
+			splashScreen->fadeIn(m_FadeSpeed);
+
+			if (splashScreen->isOpaque())
+			{
+				buttonScreenMode->setFillColor(sf::Color(0, 0, 0, 0));
+
 				m_TitleState = TITLE_STATE::START;
 				*m_PreviousState = *m_CurrentState;
 				*m_CurrentState = GAME_STATE::EXIT;
@@ -306,18 +453,32 @@ void Update::updateLoad()
 
 void Update::updatePlay()
 {
-	static Sound*			soundOk			= &m_Sounds->get("SoundOk");
-	static RectangleShape*	background		= &m_RectangleShapes->get("Background");
-	static RectangleShape*	splashScreen	= &m_RectangleShapes->get("SplashScreen");
-	static RectangleShape*	playerLeft		= &m_RectangleShapes->get("PlayerLeft");
-	static RectangleShape*	playerRight		= &m_RectangleShapes->get("PlayerRight");
-	static RectangleShape*	pongBall		= &m_RectangleShapes->get("PongBall");
+	static Sound*			soundOk					= &m_Sounds->get("SoundOk");
+	static Text*			textPlayerLeftID		= &m_Texts->get("TextPlayerLeftID");
+	static Text*			textPlayerLeftScore		= &m_Texts->get("TextPlayerLeftScore");
+	static Text*			textPlayerLeftRank		= &m_Texts->get("TextPlayerLeftRank");
+	static Text*			textPlayerRightID		= &m_Texts->get("TextPlayerRightID");
+	static Text*			textPlayerRightScore	= &m_Texts->get("TextPlayerRightScore");
+	static Text*			textPlayerRightRank		= &m_Texts->get("TextPlayerRightRank");
+	static Text*			textMessage				= &m_Texts->get("TextMessage");
+	static RectangleShape*	background				= &m_RectangleShapes->get("Background");
+	static RectangleShape*	splashScreen			= &m_RectangleShapes->get("SplashScreen");
+	static RectangleShape*	playerLeft				= &m_RectangleShapes->get("PlayerLeft");
+	static RectangleShape*	playerRight				= &m_RectangleShapes->get("PlayerRight");
+	static RectangleShape*	pongBall				= &m_RectangleShapes->get("PongBall");
 	
 	if (m_PlayState == PLAY_STATE::START)
 	{
 		// fade out splash screen
 		if (!splashScreen->isTransparent())
 		{
+			textPlayerLeftID->setRenderEnabled(			true	);
+			textPlayerLeftScore->setRenderEnabled(		true	);
+			textPlayerLeftRank->setRenderEnabled(		true	);
+			textPlayerRightID->setRenderEnabled(		true	);
+			textPlayerRightScore->setRenderEnabled(		true	);
+			textPlayerRightRank->setRenderEnabled(		true	);
+
 			splashScreen->fadeOut(m_FadeSpeed);
 		}
 	
@@ -336,9 +497,72 @@ void Update::updatePlay()
 	
 			if (playerLeft->isOpaque())
 			{
-				m_PlayState = PLAY_STATE::PLAYING;
+				textMessage->setRenderEnabled(true);
+				textMessage->setRenderLayer(3);
+				m_DeltaTime->setTimerStart(m_DeltaTime->getElapsed());
+				m_DeltaTime->setTimerEnd(m_DeltaTime->getElapsed() + sf::seconds(1));
+				std::cout << (std::string)textMessage->getString() << std::endl;
 			}
 		}
+
+		else if (m_Texts->get("TextMessage").getString() == "Game Starting In... 3")
+		{
+			if (m_DeltaTime->getTimerStart().asSeconds() >= m_DeltaTime->getTimerEnd().asSeconds())
+			{
+				textMessage->setString("Game Starting In... 2");
+				m_DeltaTime->setTimerStart(m_DeltaTime->getElapsed());
+				m_DeltaTime->setTimerEnd(m_DeltaTime->getTimerStart() + sf::Time(sf::seconds(1)));
+			}
+			else
+			{
+				m_DeltaTime->setTimerStart(m_DeltaTime->getElapsed());
+			}
+		}
+		else if (m_Texts->get("TextMessage").getString() == "Game Starting In... 2")
+		{
+			if (m_DeltaTime->getTimerStart().asSeconds() >= m_DeltaTime->getTimerEnd().asSeconds())
+			{
+				textMessage->setString("Game Starting In... 1");
+				m_DeltaTime->setTimerStart(m_DeltaTime->getElapsed());
+				m_DeltaTime->setTimerEnd(m_DeltaTime->getTimerStart() + sf::Time(sf::seconds(1)));
+			}
+			else
+			{
+				m_DeltaTime->setTimerStart(m_DeltaTime->getElapsed());
+			}
+		}
+		else if (m_Texts->get("TextMessage").getString() ==	"Game Starting In... 1")
+		{
+			if (m_DeltaTime->getTimerStart().asSeconds() >= m_DeltaTime->getTimerEnd().asSeconds())
+			{
+				textMessage->setString("           Go!");
+				m_DeltaTime->setTimerStart(m_DeltaTime->getElapsed());
+				m_DeltaTime->setTimerEnd(m_DeltaTime->getTimerStart() + sf::Time(sf::seconds(1)));;
+			}
+			else
+			{
+				m_DeltaTime->setTimerStart(m_DeltaTime->getElapsed());
+			}
+		}
+		else if (m_Texts->get("TextMessage").getString() ==	"           Go!")
+		{
+			if (m_DeltaTime->getTimerStart().asSeconds() >= m_DeltaTime->getTimerEnd().asSeconds())
+			{
+				textMessage->setString("");
+				m_DeltaTime->setTimerStart(m_DeltaTime->getElapsed());
+				m_DeltaTime->setTimerEnd(m_DeltaTime->getTimerStart() + sf::Time(sf::seconds(1)));
+			}
+			else
+			{
+				m_DeltaTime->setTimerStart(m_DeltaTime->getElapsed());
+			}
+		}
+	}
+
+
+	else if (m_PlayState == PLAY_STATE::PLAYING)
+	{
+
 	}
 
 	// fade outs and state switch to GAME_STATE::Exit
@@ -405,6 +629,23 @@ void Update::updatePause()
 void Update::updateSave()
 {
 	// TO DO
+}
+
+void Update::updateReset()
+{
+	const auto resolutionStringX = std::to_string((int)m_Resolution->x);
+	const auto resolutionStringY = std::to_string((int)m_Resolution->y);
+
+	m_Texts->get("TextTitleResolution").setString(resolutionStringX + "x" + resolutionStringY);
+
+	m_RenderWindow->close();
+
+	delete m_RenderWindow;
+
+	m_RenderWindow = new RenderWindow(sf::VideoMode(m_Resolution->x, m_Resolution->y), *m_Title, *m_Style, *m_ContextSettings);
+
+	*m_PreviousState = *m_CurrentState;
+	*m_CurrentState = GAME_STATE::NONE;
 }
 
 void Update::updateExit()
