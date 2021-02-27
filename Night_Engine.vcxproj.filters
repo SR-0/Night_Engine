@@ -122,5 +122,8 @@
     <ClInclude Include="source\core\EngineCallable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\core\CollisionDetection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

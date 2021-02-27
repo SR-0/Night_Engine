@@ -472,13 +472,6 @@ void Update::updatePlay()
 		// fade out splash screen
 		if (!splashScreen->isTransparent())
 		{
-			textPlayerLeftID->setRenderEnabled(			true	);
-			textPlayerLeftScore->setRenderEnabled(		true	);
-			textPlayerLeftRank->setRenderEnabled(		true	);
-			textPlayerRightID->setRenderEnabled(		true	);
-			textPlayerRightScore->setRenderEnabled(		true	);
-			textPlayerRightRank->setRenderEnabled(		true	);
-
 			splashScreen->fadeOut(m_FadeSpeed);
 		}
 	
@@ -548,6 +541,12 @@ void Update::updatePlay()
 		{
 			if (m_DeltaTime->getTimerStart().asSeconds() >= m_DeltaTime->getTimerEnd().asSeconds())
 			{
+				textPlayerLeftID->setRenderEnabled(true);
+				textPlayerLeftScore->setRenderEnabled(true);
+				textPlayerLeftRank->setRenderEnabled(true);
+				textPlayerRightID->setRenderEnabled(true);
+				textPlayerRightScore->setRenderEnabled(true);
+				textPlayerRightRank->setRenderEnabled(true);
 				textMessage->setString("");
 				m_DeltaTime->setTimerStart(m_DeltaTime->getElapsed());
 				m_DeltaTime->setTimerEnd(m_DeltaTime->getTimerStart() + sf::Time(sf::seconds(1)));
@@ -555,6 +554,35 @@ void Update::updatePlay()
 			else
 			{
 				m_DeltaTime->setTimerStart(m_DeltaTime->getElapsed());
+
+				switch (m_RNG.range(0, 3))
+				{
+				case 0:
+				{
+					pongBall->setSpeed(sf::Vector2f(3.f, 3.f));
+				}
+				break;
+
+				case 1:
+				{
+					pongBall->setSpeed(sf::Vector2f(-3.f, 3.f));
+				}
+				break;
+
+				case 2:
+				{
+					pongBall->setSpeed(sf::Vector2f(3.f, -3.f));
+				}
+				break;
+
+				case 3:
+				{
+					pongBall->setSpeed(sf::Vector2f(-3.f, -3.f));
+				}
+				break;
+				}
+
+				m_PlayState = PLAY_STATE::PLAYING;
 			}
 		}
 	}
@@ -562,6 +590,31 @@ void Update::updatePlay()
 
 	else if (m_PlayState == PLAY_STATE::PLAYING)
 	{
+
+		pongBall->setPosition(pongBall->getPosition().x + pongBall->getSpeed().x, pongBall->getPosition().y + pongBall->getSpeed().y);
+
+		if (pongBall->getGlobalBounds().intersects(playerLeft->getGlobalBounds()) ||
+			pongBall->getGlobalBounds().intersects(playerRight->getGlobalBounds()) )
+		{
+			pongBall->setSpeed(sf::Vector2f(-abs(pongBall->getSpeed().x), pongBall->getSpeed().y));
+		}
+		else
+		{
+			// hit top of screen
+			if (pongBall->getPosition().y - ((pongBall->getSize().y / 2) * pongBall->getScale().y) <= 0)
+			{
+				pongBall->setPosition(pongBall->getPosition().x, (pongBall->getSize().y / 2) * pongBall->getScale().y);
+				pongBall->setSpeed(sf::Vector2f(pongBall->getSpeed().x, abs(pongBall->getSpeed().y)));
+			}
+
+			// hit bottom of screen
+			if (pongBall->getPosition().y + ((pongBall->getSize().y / 2) * pongBall->getScale().y) >= m_Resolution->y)
+			{
+				pongBall->setPosition(pongBall->getPosition().x, m_Resolution->y - ((pongBall->getSize().y / 2) * pongBall->getScale().y));
+				pongBall->setSpeed(sf::Vector2f(pongBall->getSpeed().x, -abs(pongBall->getSpeed().y)));
+
+			}
+		}
 
 	}
 

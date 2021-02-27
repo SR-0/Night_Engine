@@ -32,6 +32,9 @@ public:
 
 public:
 
+	// RNG
+	RandomNumberGenerator m_RNG;
+
 	// generic fade in and out speeds for splash, background, buttons, and entities
 	const float m_FadeSpeed = 7.f;
 

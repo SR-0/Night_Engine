@@ -171,6 +171,7 @@
     <ClCompile Include="source\callables\Update.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\core\CollisionDetection.h" />
     <ClInclude Include="source\core\Input.h" />
     <ClInclude Include="source\core\DeltaTime.h" />
     <ClInclude Include="source\core\AspectRatioCalculator.h" />

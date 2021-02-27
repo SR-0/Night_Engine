@@ -165,7 +165,7 @@ void Setup::setupTexts()
 	m_Texts->get("TextTitleGameMode").setPosition(		(621	*	m_Scale->x)	,	(343	*	m_Scale->y)		);
 	m_Texts->get("TextTitleScreenMode").setPosition(	(577	*	m_Scale->x)	,	(373	*	m_Scale->y)		);
 	m_Texts->get("TextTitleResolution").setPosition(	(588	*	m_Scale->x)	,	(403	*	m_Scale->y)		);
-	m_Texts->get("TextTitleQuit").setPosition(			(617	*	m_Scale->x)	,	(433	*	m_Scale->y)		);
+	m_Texts->get("TextTitleQuit").setPosition(			(614	*	m_Scale->x)	,	(433	*	m_Scale->y)		);
 	m_Texts->get("TextTitleDetails").setPosition(		(530	*	m_Scale->x)	,	(653	*	m_Scale->y)		);
 	m_Texts->get("TextPlayerLeftID").setPosition(		(32		*	m_Scale->x)	,	(27		*	m_Scale->y)		);
 	m_Texts->get("TextPlayerLeftScore").setPosition(	(32		*	m_Scale->x)	,	(59		*	m_Scale->y)		);
@@ -259,17 +259,17 @@ void Setup::setupRectangleShapes()
 	m_RectangleShapes->get("PlayerRight").setScale(			*m_Scale	);
 	m_RectangleShapes->get("PongBall").setScale(			*m_Scale	);
 
-	m_RectangleShapes->get("Background").setPosition(		sf::Vector2f(	0						*	m_Scale->x	,	0							* m_Scale->y	)	);
-	m_RectangleShapes->get("ButtonPlay").setPosition(		sf::Vector2f(	0						*	m_Scale->x	,	(313	-1)					* m_Scale->y	)	);
-	m_RectangleShapes->get("ButtonGameMode").setPosition(	sf::Vector2f(	0						*	m_Scale->x	,	(343	-1)					* m_Scale->y	)	);
-	m_RectangleShapes->get("ButtonScreenMode").setPosition(	sf::Vector2f(	0						*	m_Scale->x	,	(373	-1)					* m_Scale->y	)	);
-	m_RectangleShapes->get("ButtonResolution").setPosition(	sf::Vector2f(	0						*	m_Scale->x	,	(403	-1)					* m_Scale->y	)	);
-	m_RectangleShapes->get("ButtonQuit").setPosition(		sf::Vector2f(	0						*	m_Scale->x	,	(433	-1)					* m_Scale->y	)	);
-	m_RectangleShapes->get("MessageBanner").setPosition(	sf::Vector2f(	0						*	m_Scale->x	,	303							* m_Scale->y	)	);
-	m_RectangleShapes->get("SplashScreen").setPosition(		sf::Vector2f(	0						*	m_Scale->x	,	0							* m_Scale->y	)	);
-	m_RectangleShapes->get("PlayerLeft").setPosition(		sf::Vector2f(	50						*	m_Scale->x	,	(m_Resolution->y	/ 2)	* m_Scale->y	)	);
-	m_RectangleShapes->get("PlayerRight").setPosition(		sf::Vector2f(	1230					*	m_Scale->x	,	(m_Resolution->y	/ 2)	* m_Scale->y	)	);
-	m_RectangleShapes->get("PongBall").setPosition(			sf::Vector2f(	(m_Resolution->x / 2)	*	m_Scale->x	,	(m_Resolution->y	/ 2)	* m_Scale->y	)	);
+	m_RectangleShapes->get("Background").setPosition(		sf::Vector2f(	0														*	m_Scale->x	,	0														* m_Scale->y	)	);
+	m_RectangleShapes->get("ButtonPlay").setPosition(		sf::Vector2f(	0														*	m_Scale->x	,	(313	-1)												* m_Scale->y	)	);
+	m_RectangleShapes->get("ButtonGameMode").setPosition(	sf::Vector2f(	0														*	m_Scale->x	,	(343	-1)												* m_Scale->y	)	);
+	m_RectangleShapes->get("ButtonScreenMode").setPosition(	sf::Vector2f(	0														*	m_Scale->x	,	(373	-1)												* m_Scale->y	)	);
+	m_RectangleShapes->get("ButtonResolution").setPosition(	sf::Vector2f(	0														*	m_Scale->x	,	(403	-1)												* m_Scale->y	)	);
+	m_RectangleShapes->get("ButtonQuit").setPosition(		sf::Vector2f(	0														*	m_Scale->x	,	(433	-1)												* m_Scale->y	)	);
+	m_RectangleShapes->get("MessageBanner").setPosition(	sf::Vector2f(	0														*	m_Scale->x	,	303														* m_Scale->y	)	);
+	m_RectangleShapes->get("SplashScreen").setPosition(		sf::Vector2f(	0														*	m_Scale->x	,	0														* m_Scale->y	)	);
+	m_RectangleShapes->get("PlayerLeft").setPosition(		sf::Vector2f(	50														*	m_Scale->x	,	(m_Textures->get("TextureBackground").getSize().y / 2)	* m_Scale->y	)	);
+	m_RectangleShapes->get("PlayerRight").setPosition(		sf::Vector2f(	1230													*	m_Scale->x	,	(m_Textures->get("TextureBackground").getSize().y / 2)	* m_Scale->y	)	);
+	m_RectangleShapes->get("PongBall").setPosition(			sf::Vector2f(	(m_Textures->get("TextureBackground").getSize().x / 2)	*	m_Scale->x	,	(m_Textures->get("TextureBackground").getSize().y / 2)	* m_Scale->y	)	);
 
 	m_RectangleShapes->get("Background").setFillColor(			sf::Color::White	);
 	m_RectangleShapes->get("ButtonPlay").setFillColor(			sf::Color::Black	);

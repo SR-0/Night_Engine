@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics/RectangleShape.hpp>
+#include "CollisionDetection.h"
 
 class RectangleShape : public sf::RectangleShape
 {
@@ -139,9 +140,10 @@ public:
 
 private:
 
-	sf::Vector2f	m_Speed			= sf::Vector2f();
-	bool			m_RenderEnabled = false;
-	unsigned int	m_RenderLayer	= 0;
+	CollisionDetection	m_Collision;
+	sf::Vector2f		m_Speed			= sf::Vector2f();
+	bool				m_RenderEnabled = false;
+	unsigned int		m_RenderLayer	= 0;
 
 };
 

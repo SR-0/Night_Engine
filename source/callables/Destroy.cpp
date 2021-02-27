@@ -43,7 +43,7 @@ void Destroy::destroySounds()
 
 void Destroy::destroyMusic()
 {
-	//m_Music->destroyAll(); // <- what's is going on with this, should work just as well as the others but gives me an error
+	m_Music->destroyAll(); // <- what's is going on with this, should work just as well as the others but gives me an error
 }
 
 void Destroy::destroyTexts()
